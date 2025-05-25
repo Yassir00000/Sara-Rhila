@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elena Rossini - Interior Designer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #891E2D;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #333;
+            --shadow: 0 10px 30px rgba(137, 30, 45, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color) 0%, rgba(137, 30, 45, 0.8) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: -2px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--white);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            margin-bottom: 4rem;
+            opacity: 0.8;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--light-gray);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .service-card p {
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background: var(--light-gray);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.05);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--primary-color), rgba(137, 30, 45, 0.8));
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-content {
+            text-align: center;
+            color: var(--white);
+            padding: 2rem;
+        }
+
+        .portfolio-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-right: 1rem;
+            width: 30px;
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #6b1721;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-gray);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .social-links {
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 0 1rem;
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-info,
+            .contact-form {
+                padding: 2rem;
+            }
+
+            .service-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">Elena Rossini</a>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">Chi Sono</a></li>
+                <li><a href="#services" class="nav-link">Servizi</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#contact" class="nav-link">Contatti</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Design che Trasforma</h1>
+            <p class="subtitle">Interior Designer & Architetto</p>
+            <p class="description">Creo spazi unici che riflettono la tua personalità, combinando funzionalità ed eleganza per trasformare la tua casa in un ambiente straordinario.</p>
+            <a href="#contact" class="cta-button">Inizia il Tuo Progetto</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title">Chi Sono</h2>
+            <p class="section-subtitle">La passione per il design che dà vita agli spazi</p>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Sono Elena Rossini, interior designer con oltre 10 anni di esperienza nel settore del design d'interni. La mia filosofia si basa sulla convinzione che ogni spazio debba raccontare una storia unica, riflettendo la personalità e lo stile di vita di chi lo abita.</p>
+                    
+                    <p>Laureata in Architettura presso il Politecnico, ho perfezionato le mie competenze attraverso collaborazioni internazionali e progetti residenziali e commerciali di alto profilo. Il mio approccio combina creatività, funzionalità e sostenibilità.</p>
+                    
+                    <p>Ogni progetto è un'opportunità per creare qualcosa di straordinario, bilanciando estetica contemporanea e comfort abitativo, sempre nel rispetto del budget e dei tempi concordati.</p>
+                </div>
+                <div class="about-image">
+                    <svg width="100%" height="400" viewBox="0 0 400 400" style="border-radius: 10px; box-shadow: var(--shadow);">
+                        <defs>
+                            <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#891E2D;stop-opacity:0.1" />
+                                <stop offset="100%" style="stop-color:#891E2D;stop-opacity:0.3" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#bgGradient)"/>
+                        <circle cx="200" cy="180" r="80" fill="#891E2D" opacity="0.8"/>
+                        <rect x="120" y="260" width="160" height="100" rx="10" fill="#891E2D" opacity="0.6"/>
+                        <text x="200" y="320" text-anchor="middle" fill="#891E2D" font-size="16" font-weight="600">Elena Rossini</text>
+                        <text x="200" y="340" text-anchor="middle" fill="#891E2D" font-size="12">Interior Designer</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title">Cosa Faccio</h2>
+            <p class="section-subtitle">Servizi completi per trasformare i tuoi spazi</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Design Residenziale</h3>
+                    <p>Progettazione completa di interni per abitazioni private, dalla consulenza iniziale alla realizzazione finale, curando ogni dettaglio per creare ambienti unici e funzionali.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Spazi Commerciali</h3>
+                    <p>Design di uffici, showroom e spazi commerciali che riflettono l'identità del brand e migliorano l'esperienza dei clienti, ottimizzando funzionalità e impatto visivo.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Consulenza Colori</h3>
+                    <p>Analisi cromatica personalizzata per la scelta di palette colori armoniose che valorizzano gli spazi e creano l'atmosfera desiderata in ogni ambiente.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <h3>Arredamento</h3>
+                    <p>Selezione e coordinamento di mobili, tessuti e complementi d'arredo, bilanciando stile personale, qualità dei materiali e rispetto del budget disponibile.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Lighting Design</h3>
+                    <p>Progettazione illuminotecnica per valorizzare gli spazi attraverso la luce, creando atmosfere suggestive e funzionali per ogni momento della giornata.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    <h3>Ristrutturazioni</h3>
+                    <p>Coordinamento completo di progetti di ristrutturazione, dalla pianificazione agli interventi strutturali, garantendo qualità e rispetto dei tempi di consegna.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section portfolio">
+        <div class="container">
+            <h2 class="section-title">I Miei Lavori</h2>
+            <p class="section-subtitle">Progetti realizzati con passione e professionalità</p>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <svg width="100%" height="300" viewBox="0 0 350 300">
+                        <defs>
+                            <linearGradient id="living1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#f8f9fa"/>
+                                <stop offset="100%" style="stop-color:#e9ecef"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#living1)"/>
+                        <rect x="50" y="100" width="120" height="80" fill="#891E2D" opacity="0.8"/>
+                        <rect x="200" y="50" width="80" height="120" fill="#891E2D" opacity="0.6"/>
+                        <circle cx="100" cy="200" r="30" fill="#891E2D" opacity="0.4"/>
+                    </svg>
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-content">
+                            <h3>Living Moderno</h3>
+                            <p>Appartamento Milano</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <svg width="100%" height="300" viewBox="0 0 350 300">
+                        <rect width="100%" height="100%" fill="#f8f9fa"/>
+                        <rect x="30" y="50" width="100" height="60" fill="#891E2D" opacity="0.7"/>
+                        <rect x="150" y="80" width="150" height="40" fill="#891E2D" opacity="0.5"/>
+                        <rect x="80" y="150" width="180" height="100" fill="#891E2D" opacity="0.3"/>
+                    </svg>
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-content">
+                            <h3>Cucina Contemporanea</h3>
+                            <p>Villa Firenze</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <svg width="100%" height="300" viewBox="0 0 350 300">
+                        <rect width="100%" height="100%" fill="#f8f9fa"/>
+                        <circle cx="175" cy="100" r="60" fill="#891E2D" opacity="0.6"/>
+                        <rect x="100" y="180" width="150" height="80" fill="#891E2D" opacity="0.4"/>
+                        <rect x="50" y="50" width="40" height="200" fill="#891E2D" opacity="0.8"/>
+                    </svg>
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-content">
+                            <h3>Camera da Letto</h3>
+                            <p>Loft Roma</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <svg width="100%" height="300" viewBox="0 0 350 300">
+                        <rect width="100%" height="100%" fill="#f8f9fa"/>
+                        <rect x="60" y="60" width="80" height="180" fill="#891E2D" opacity="0.7"/>
+                        <rect x="160" y="100" width="120" height="100" fill="#891E2D" opacity="0.5"/>
+                        <circle cx="250" cy="80" r="25" fill="#891E2D" opacity="0.9"/>
+                    </svg>
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-content">
+                            <h3>Ufficio Direzionale</h3>
+                            <p>Centro Bologna</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <svg width="100%" height="300" viewBox="0 0 350 300">
+                        <rect width="100%" height="100%" fill="#f8f9fa"/>
+                        <rect x="40" y="120" width="270" height="60" fill="#891E2D" opacity="0.6"/>
+                        <rect x="100" y="40" width="50" height="120" fill="#891E2D" opacity="0.8"/>
+                        <rect x="200" y="70" width="80" height="80" fill="#891E2D" opacity="0.4"/>
+                    </svg>
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-content">
+                            <h3>Bagno di Design</h3>
+                            <p>Penthouse Torino</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <svg width="100%" height="300" viewBox="0 0 350 300">
+                        <rect width="100%" height="100%" fill="#f8f9fa"/>
+                        <polygon points="50,50 150,80 120,180 80,160" fill="#891E2D" opacity="0.7"/>
+                        <rect x="180" y="100" width="120" height="120" fill="#891E2D" opacity="0.5"/>
+                        <circle cx="280" cy="60" r="20" fill="#891E2D" opacity="0.9"/>
+                    </svg>
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-content">
+                            <h3>Showroom</h3>
+                            <p>Concept Store Venezia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Contatti</h2>
+            <p class="section-subtitle">Iniziamo insieme il tuo progetto di design</p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3 style="color: var(--primary-color); margin-bottom: 2rem; font-size: 1.5rem;">Informazioni di Contatto</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Studio</strong><br>
+                            Via del Design, 123<br>
+                            20121 Milano, Italia
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Telefono</strong><br>
+                            +39 02 1234 5678
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong><br>
+                            elena@rossinidesign.it
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Orari</strong><br>
+                            Lun-Ven: 9:00-18:00<br>
+                            Su appuntamento
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3 style="color: var(--primary-color); margin-bottom: 2rem; font-size: 1.5rem;">Richiedi una Consulenza</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Nome e Cognome</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefono</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="project">Tipo di Progetto</label>
+                            <select id="project" name="project" style="width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;">
+                                <option value="">Seleziona...</option>
+                                <option value="residential">Design Residenziale</option>
+                                <option value="commercial">Spazio Commerciale</option>
+                                <option value="consultation">Consulenza</option>
+                                <option value="renovation">Ristrutturazione</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Messaggio</label>
+                            <textarea id="message" name="message" placeholder="Descrivi brevemente il tuo progetto..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Invia Richiesta</button>
